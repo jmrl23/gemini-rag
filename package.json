@@ -1,0 +1,21 @@
+{
+  "name": "gemini-rag",
+  "main": "build/main.js",
+  "scripts": {
+    "build": "tsc --build",
+    "start": "node -r ./load-env.mjs ."
+  },
+  "packageManager": "yarn@4.10.3",
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.10",
+    "@types/node": "^24.9.1",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@google/genai": "^1.27.0",
+    "compute-cosine-similarity": "^1.1.0",
+    "dotenv": "^17.2.3",
+    "pdf-parse": "^2.4.5",
+    "tiktoken": "^1.0.22"
+  }
+}
