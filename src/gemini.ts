@@ -5,6 +5,7 @@ export const ai = new GoogleGenAI({
 });
 
 export async function generateAnswer(context: string, question: string) {
+  const FALLBACK_ANSWER = 'Not mentioned.';
   const answer = await ai.models.generateContent({
     model: 'gemini-2.5-flash',
     contents: [
@@ -14,7 +15,7 @@ export async function generateAnswer(context: string, question: string) {
           {
             text: `
             Answer the question **only** using the information below.
-            If the answer cannot be found, say "Not mentioned."
+            If the answer cannot be found, say "${FALLBACK_ANSWER}".
 
             Context:
             ${context}
@@ -29,7 +30,7 @@ export async function generateAnswer(context: string, question: string) {
       },
     ],
   });
-  return answer.text;
+  return answer.text ?? FALLBACK_ANSWER;
 }
 
 export async function embedText(
@@ -41,7 +42,10 @@ export async function embedText(
     contents: text,
     config: {
       taskType,
-      outputDimensionality: 768,
+      outputDimensionality: parseInt(
+        process.env.EMBEDDINGS_DIMENSION ?? '768',
+        10,
+      ),
     },
   });
   return response.embeddings?.[0].values ?? [];

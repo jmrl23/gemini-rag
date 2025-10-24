@@ -1,4 +1,3 @@
-import similarity from 'compute-cosine-similarity';
 import readline from 'node:readline/promises';
 import { PDFParse } from 'pdf-parse';
 import cl100k_base from 'tiktoken/encoders/cl100k_base.json';
@@ -38,19 +37,4 @@ export async function input(question: string): Promise<string> {
   const answer = await readlineInterface.question(question);
   readlineInterface.close();
   return answer;
-}
-
-export async function getBestMatch(
-  chunkedDocs: string[],
-  contextEmbeddings: number[][],
-  queryEmbeddings: number[],
-) {
-  const similarities = contextEmbeddings.map((docVec) => {
-    const score = similarity(queryEmbeddings, docVec);
-    return score ?? -1;
-  });
-  const maxSim = Math.max(...similarities);
-  const maxIndex = similarities.indexOf(maxSim);
-  const bestMatch = chunkedDocs[maxIndex];
-  return bestMatch;
 }

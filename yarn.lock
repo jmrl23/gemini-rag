@@ -129,6 +129,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@qdrant/js-client-rest@npm:^1.15.1":
+  version: 1.15.1
+  resolution: "@qdrant/js-client-rest@npm:1.15.1"
+  dependencies:
+    "@qdrant/openapi-typescript-fetch": "npm:1.2.6"
+    "@sevinf/maybe": "npm:0.5.0"
+    undici: "npm:^6.0.0"
+  peerDependencies:
+    typescript: ">=4.7"
+  checksum: 10c0/734e6cd9a9779a0aeb4c41cb23efb4962559dcf13c844b5ff8b545314e430fbb47c6b4cc1e2183ee39c13053144d87b0d0ec5abb1c570ccbfef22e8bd51afc5b
+  languageName: node
+  linkType: hard
+
+"@qdrant/openapi-typescript-fetch@npm:1.2.6":
+  version: 1.2.6
+  resolution: "@qdrant/openapi-typescript-fetch@npm:1.2.6"
+  checksum: 10c0/0359bb6939f84572e2d689b70949daea37a7cfc16f54919db8acbc496e65aca2f2a5e99e9790ec1b29e9e83f513c96ceb76054f31f9917b3fd798bed174bf96b
+  languageName: node
+  linkType: hard
+
+"@sevinf/maybe@npm:0.5.0":
+  version: 0.5.0
+  resolution: "@sevinf/maybe@npm:0.5.0"
+  checksum: 10c0/42033a7c2ca07f4e17b11d69082b756b83c355170cedf7ef3e5202b5c5f531c12054745273364ca245b175eb862597ae0de2663f260c4a4ce652f8b30393131b
+  languageName: node
+  linkType: hard
+
 "@tsconfig/recommended@npm:^1.0.10":
   version: 1.0.10
   resolution: "@tsconfig/recommended@npm:1.0.10"
@@ -173,35 +200,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"compute-cosine-similarity@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "compute-cosine-similarity@npm:1.1.0"
+"copy-anything@npm:^4":
+  version: 4.0.5
+  resolution: "copy-anything@npm:4.0.5"
   dependencies:
-    compute-dot: "npm:^1.1.0"
-    compute-l2norm: "npm:^1.1.0"
-    validate.io-array: "npm:^1.0.5"
-    validate.io-function: "npm:^1.0.2"
-  checksum: 10c0/82c5df828f0c3af2cf74e400916e904560fdbe61d740cb91f03b191f372408c439ab0afce8c053f6ca3fcf74d2f04bf0083e5b8b07fafceaaf50a6e35d191cb3
-  languageName: node
-  linkType: hard
-
-"compute-dot@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "compute-dot@npm:1.1.0"
-  dependencies:
-    validate.io-array: "npm:^1.0.3"
-    validate.io-function: "npm:^1.0.2"
-  checksum: 10c0/1e81ab6a18d9fd0fae9265e501d00fe303d1305c7370db531d38ca35e09f9ceba66bec27c42992abd2f271f104f084db93a56e7f49424f4a4aea5c8265881d93
-  languageName: node
-  linkType: hard
-
-"compute-l2norm@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "compute-l2norm@npm:1.1.0"
-  dependencies:
-    validate.io-array: "npm:^1.0.3"
-    validate.io-function: "npm:^1.0.2"
-  checksum: 10c0/af37fca05e662f221d73f41004972d95998c6927c666b95b9279466f34a06e374ae817194cbadd5c28d0e99a84526022b66f7d16e6e8e5cf9f909629ae381a93
+    is-what: "npm:^5.2.0"
+  checksum: 10c0/d0a4a4102334399dae8504a2c2e13f45ad05746a9fd5cc0df349a554e3749a05e8a6d62b3724a8049cd59fc0bbbf4f54c4edc94a428edc76211dffe3ac0af586
   languageName: node
   linkType: hard
 
@@ -293,11 +297,12 @@ __metadata:
   resolution: "gemini-rag@workspace:."
   dependencies:
     "@google/genai": "npm:^1.27.0"
+    "@qdrant/js-client-rest": "npm:^1.15.1"
     "@tsconfig/recommended": "npm:^1.0.10"
     "@types/node": "npm:^24.9.1"
-    compute-cosine-similarity: "npm:^1.1.0"
     dotenv: "npm:^17.2.3"
     pdf-parse: "npm:^2.4.5"
+    superjson: "npm:^2.2.3"
     tiktoken: "npm:^1.0.22"
     typescript: "npm:^5.9.3"
   languageName: unknown
@@ -342,6 +347,13 @@ __metadata:
     agent-base: "npm:^7.1.2"
     debug: "npm:4"
   checksum: 10c0/f729219bc735edb621fa30e6e84e60ee5d00802b8247aac0d7b79b0bd6d4b3294737a337b93b86a0bd9e68099d031858a39260c976dc14cdbba238ba1f8779ac
+  languageName: node
+  linkType: hard
+
+"is-what@npm:^5.2.0":
+  version: 5.5.0
+  resolution: "is-what@npm:5.5.0"
+  checksum: 10c0/065c8a4ac651988a495cc0211c2754c198788383c9fe1bbfdf6d237c423114a0c5f2fc3e26ad7ea43a63cd4169f4503f584305acbac91706d5308cc14dedd1bd
   languageName: node
   linkType: hard
 
@@ -431,6 +443,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"superjson@npm:^2.2.3":
+  version: 2.2.3
+  resolution: "superjson@npm:2.2.3"
+  dependencies:
+    copy-anything: "npm:^4"
+  checksum: 10c0/276179f4a56be5c73ebb25abf07a4801d6b000f98a31ebaa3f41da1342f9d31c7fadde81bf79db8eeeec7f0ba8f62c30ca681b166a0244e1414f33fbb750c358
+  languageName: node
+  linkType: hard
+
 "tiktoken@npm:^1.0.22":
   version: 1.0.22
   resolution: "tiktoken@npm:1.0.22"
@@ -465,17 +486,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"validate.io-array@npm:^1.0.3, validate.io-array@npm:^1.0.5":
-  version: 1.0.6
-  resolution: "validate.io-array@npm:1.0.6"
-  checksum: 10c0/ece1e93d24fe1c92f5ec5983e186f7890021c9144c2ad0e45d76695267861e9ad0362474a038a240caf3ab30f7b7595738c7f6efe9f6f0f9ae94290d23c39ef6
-  languageName: node
-  linkType: hard
-
-"validate.io-function@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "validate.io-function@npm:1.0.2"
-  checksum: 10c0/210b4bbf8c71c7863df122beae76387406eb960a6540b003568dcde2bbb4baac17a2c8f0eda014f0c5d2440396e87141e62028cc8758ddc61589e3425bd26c27
+"undici@npm:^6.0.0":
+  version: 6.22.0
+  resolution: "undici@npm:6.22.0"
+  checksum: 10c0/47903c489d73e26bd47960cf2f04d63282ed050818b672cb05f8dfb6403381b850cf1b1751832654fd3af22aacd9d780e5e61aff563cd97943f5c4f10d5b3e23
   languageName: node
   linkType: hard
 
