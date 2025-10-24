@@ -1,4 +1,3 @@
-import dotenv from 'dotenv';
 import { embedText, generateAnswer } from './gemini';
 import { chunkText, getBestMatch, input, pdfToText } from './utils';
 
