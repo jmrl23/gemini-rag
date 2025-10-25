@@ -28,18 +28,23 @@ export async function getResponse(
     });
   }
 
-  const queryEmbeddings = await embedText(question, 'RETRIEVAL_QUERY');
+  const chunkedEmbeddings = await Promise.all(
+    chunkedContext.map((text) => embedText(text, 'RETRIEVAL_DOCUMENT')),
+  );
   await qdrant.upsert(COLLECTION_NAME, {
-    points: chunkedContext.map((text) => ({
+    points: chunkedContext.map((text, index) => ({
       id: randomUUID(),
-      vector: queryEmbeddings,
+      vector: chunkedEmbeddings[index],
       payload: { text },
     })),
   });
+
+  const queryEmbeddings = await embedText(question, 'RETRIEVAL_QUERY');
   const search = await qdrant.search(COLLECTION_NAME, {
     vector: queryEmbeddings,
     limit: 5,
   });
+
   const TEMPLATE_PATH = path.resolve(
     __dirname,
     `../templates/${PROMPT_TEMPLATE}`,
