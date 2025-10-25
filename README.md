@@ -25,7 +25,7 @@ A Retrieval-Augmented Generation (RAG) system built with TypeScript. This projec
 
 1. **Provide necessary environment variables (create a `.env` file)**
 
-   > check check .env.example for reference
+   > check [.env.example](https://github.com/jmrl23/gemini-rag/blob/main/.env.example) for reference
 
 1. **Install dependencies:**
 
