@@ -10,10 +10,7 @@ async function main() {
   });
   const chunkedContext = chunkText(fullContext);
 
-  console.log(
-    'Answer:',
-    await ask(chunkedContext, 'Introduce yourself', history, false),
-  );
+  console.log('Answer:', await ask(chunkedContext, 'Introduce yourself'));
 
   while (true) {
     const question = await input('Question: ');
@@ -29,14 +26,13 @@ void main();
 async function ask(
   chunkedContext: string[],
   question: string,
-  history: ConversationMessage[],
-  pushHistory = true,
+  history?: ConversationMessage[],
 ) {
   const [userMessage, assistantResponse] = await getResponse(
     chunkedContext,
-    history.slice(-5),
+    history ? history.slice(-5) : [],
     question,
   );
-  if (pushHistory) history.push(userMessage, assistantResponse);
+  history?.push(userMessage, assistantResponse);
   return assistantResponse.text;
 }
