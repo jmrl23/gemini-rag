@@ -163,6 +163,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/mustache@npm:^4.2.6":
+  version: 4.2.6
+  resolution: "@types/mustache@npm:4.2.6"
+  checksum: 10c0/f49a83b189e92c962e9b61094c80c979f115ea876bd746bdb9f725c38ab8981a6691e3d1d5cd008ade24b6e5040602970bc0bc60ade71772501d1df8adc7adad
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:^24.9.1":
   version: 24.9.1
   resolution: "@types/node@npm:24.9.1"
@@ -290,8 +297,10 @@ __metadata:
     "@google/genai": "npm:^1.27.0"
     "@qdrant/js-client-rest": "npm:^1.15.1"
     "@tsconfig/recommended": "npm:^1.0.10"
+    "@types/mustache": "npm:^4.2.6"
     "@types/node": "npm:^24.9.1"
     dotenv: "npm:^17.2.3"
+    mustache: "npm:^4.2.0"
     pdf-parse: "npm:^2.4.5"
     tiktoken: "npm:^1.0.22"
     typescript: "npm:^5.9.3"
@@ -374,6 +383,15 @@ __metadata:
   version: 2.1.3
   resolution: "ms@npm:2.1.3"
   checksum: 10c0/d924b57e7312b3b63ad21fc5b3dc0af5e78d61a1fc7cfb5457edaf26326bf62be5307cc87ffb6862ef1c2b33b0233cdb5d4f01c4c958cc0d660948b65a287a48
+  languageName: node
+  linkType: hard
+
+"mustache@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "mustache@npm:4.2.0"
+  bin:
+    mustache: bin/mustache
+  checksum: 10c0/1f8197e8a19e63645a786581d58c41df7853da26702dbc005193e2437c98ca49b255345c173d50c08fe4b4dbb363e53cb655ecc570791f8deb09887248dd34a2
   languageName: node
   linkType: hard
 
