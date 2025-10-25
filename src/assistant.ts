@@ -4,6 +4,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { ConversationMessage, embedText, generateAnswer } from './gemini';
 import { qdrant } from './qdrant';
+import {
+  ASSISTANT_NAME,
+  COLLECTION_NAME,
+  EMBEDDINGS_DIMENSION,
+  PROMPT_TEMPLATE,
+} from './env';
 
 export async function getResponse(
   chunkedContext: string[],
@@ -11,44 +17,47 @@ export async function getResponse(
   question: string,
 ): Promise<[ConversationMessage, ConversationMessage]> {
   const { exists: collectionExists } = await qdrant.collectionExists(
-    process.env.COLLECTION_NAME || 'docs',
+    COLLECTION_NAME,
   );
   if (!collectionExists) {
-    await qdrant.createCollection(process.env.COLLECTION_NAME || 'docs', {
+    await qdrant.createCollection(COLLECTION_NAME, {
       vectors: {
-        size: parseInt(process.env.EMBEDDINGS_DIMENSION || '768', 10),
+        size: EMBEDDINGS_DIMENSION,
         distance: 'Cosine',
       },
     });
   }
 
   const queryEmbeddings = await embedText(question, 'RETRIEVAL_QUERY');
-  await qdrant.upsert(process.env.COLLECTION_NAME || 'docs', {
+  await qdrant.upsert(COLLECTION_NAME, {
     points: chunkedContext.map((text) => ({
       id: randomUUID(),
       vector: queryEmbeddings,
       payload: { text },
     })),
   });
-  const search = await qdrant.search(process.env.COLLECTION_NAME || 'docs', {
+  const search = await qdrant.search(COLLECTION_NAME, {
     vector: queryEmbeddings,
     limit: 5,
   });
   const TEMPLATE_PATH = path.resolve(
     __dirname,
-    `../templates/${process.env.PROMPT_TEMPLATE}`,
+    `../templates/${PROMPT_TEMPLATE}`,
   );
+  if (!fs.existsSync(TEMPLATE_PATH)) {
+    throw new Error(`Prompt template not found: ${TEMPLATE_PATH}`);
+  }
   const text = mustache.render(fs.readFileSync(TEMPLATE_PATH).toString(), {
-    assistant_name: process.env.ASSISTANT_NAME || 'AI Assistant',
+    assistant_name: ASSISTANT_NAME,
     context: search
       .map((item) => (item.payload as unknown as { text: string }).text)
       .join('\n'),
     history: history
       .map(
         (message) =>
-          `- **${
-            message.role === 'user' ? 'User' : process.env.ASSISTANT_NAME
-          }:** ${message.text}`,
+          `- **${message.role === 'user' ? 'User' : ASSISTANT_NAME}:** ${
+            message.text
+          }`,
       )
       .join('\n'),
     question,

@@ -1,7 +1,13 @@
 import { GoogleGenAI, Part } from '@google/genai';
+import {
+  CONTENTS_MODEL,
+  EMBEDDINGS_DIMENSION,
+  EMBEDDINGS_MODEL,
+  GENAI_API_KEY,
+} from './env';
 
 export const ai = new GoogleGenAI({
-  apiKey: process.env.GENAI_API_KEY,
+  apiKey: GENAI_API_KEY,
 });
 
 export type ConversationMessage = {
@@ -11,7 +17,7 @@ export type ConversationMessage = {
 
 export async function generateAnswer(parts: Part[]) {
   const response = await ai.models.generateContent({
-    model: process.env.CONTENTS_MODEL || 'gemini-2.5-flash',
+    model: CONTENTS_MODEL,
     contents: [
       {
         role: 'user',
@@ -28,14 +34,11 @@ export async function embedText(
   taskType: 'RETRIEVAL_QUERY' | 'RETRIEVAL_DOCUMENT',
 ) {
   const response = await ai.models.embedContent({
-    model: process.env.EMBEDDINGS_MODEL || 'gemini-embedding-001',
+    model: EMBEDDINGS_MODEL,
     contents: text,
     config: {
       taskType,
-      outputDimensionality: parseInt(
-        process.env.EMBEDDINGS_DIMENSION ?? '768',
-        10,
-      ),
+      outputDimensionality: EMBEDDINGS_DIMENSION,
     },
   });
   return response.embeddings?.[0].values ?? [];

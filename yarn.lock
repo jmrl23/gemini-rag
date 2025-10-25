@@ -242,6 +242,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"env-var@npm:^7.5.0":
+  version: 7.5.0
+  resolution: "env-var@npm:7.5.0"
+  checksum: 10c0/7eb93446417b2a1caaec213ffa1a28686a23d18f9364c9c007c113bedabf4632f8890a95b23022f3ac59351807f8ed27fce3ea68f85462406d7d19b2f6c75e88
+  languageName: node
+  linkType: hard
+
 "extend@npm:^3.0.2":
   version: 3.0.2
   resolution: "extend@npm:3.0.2"
@@ -300,6 +307,7 @@ __metadata:
     "@types/mustache": "npm:^4.2.6"
     "@types/node": "npm:^24.9.1"
     dotenv: "npm:^17.2.3"
+    env-var: "npm:^7.5.0"
     mustache: "npm:^4.2.0"
     pdf-parse: "npm:^2.4.5"
     tiktoken: "npm:^1.0.22"

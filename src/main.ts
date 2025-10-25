@@ -1,11 +1,12 @@
 import { getResponse } from './assistant';
+import { PDF_RESOURCE_URL } from './env';
 import { ConversationMessage } from './gemini';
 import { chunkText, input, pdfToText } from './utils';
 
 async function main() {
   const history: ConversationMessage[] = [];
   const fullContext = await pdfToText({
-    url: process.env.PDF_RESOURCE_URL,
+    url: PDF_RESOURCE_URL,
   });
   const chunkedContext = chunkText(fullContext);
 
