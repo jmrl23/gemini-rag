@@ -1,21 +1,30 @@
 import { randomUUID } from 'node:crypto';
-import { embedText, generateAnswer } from './gemini';
+import { ConversationMessage, embedText, generateAnswer } from './gemini';
 import { qdrant } from './qdrant';
 import { chunkText, input, pdfToText } from './utils';
 
 async function main() {
+  const history: ConversationMessage[] = [];
+
   while (true) {
     const question = await input('Question: ');
     if (question === 'exit' || question === 'quit') break;
     if (!question) throw new Error('Question is required');
-    const answer = await ask(question);
-    console.log('Answer:', answer);
+    const [userMessage, assistantResponse] = await ask(
+      question,
+      history.slice(-5),
+    );
+    history.push(userMessage, assistantResponse);
+    console.log('Answer:', assistantResponse.text);
   }
 }
 
 void main();
 
-async function ask(question: string): Promise<string> {
+async function ask(
+  question: string,
+  history: ConversationMessage[],
+): Promise<ReturnType<typeof generateAnswer>> {
   const { exists: collectionExists } = await qdrant.collectionExists(
     process.env.COLLECTION_NAME || 'docs',
   );
@@ -44,12 +53,13 @@ async function ask(question: string): Promise<string> {
     vector: queryEmbeddings,
     limit: 5,
   });
-  const answer = await generateAnswer(
+  const data = await generateAnswer(
     search
       .map((item) => (item.payload as unknown as { text: string }).text)
       .join('\n'),
     question,
+    history,
   );
 
-  return answer;
+  return data;
 }

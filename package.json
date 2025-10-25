@@ -16,7 +16,6 @@
     "@qdrant/js-client-rest": "^1.15.1",
     "dotenv": "^17.2.3",
     "pdf-parse": "^2.4.5",
-    "superjson": "^2.2.3",
     "tiktoken": "^1.0.22"
   }
 }

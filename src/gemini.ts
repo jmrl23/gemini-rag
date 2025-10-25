@@ -4,33 +4,80 @@ export const ai = new GoogleGenAI({
   apiKey: process.env.GENAI_API_KEY,
 });
 
-export async function generateAnswer(context: string, question: string) {
+export type ConversationMessage = {
+  role: 'user' | 'model';
+  text: string;
+};
+
+export async function generateAnswer(
+  context: string,
+  question: string,
+  history: ConversationMessage[],
+): Promise<[ConversationMessage, ConversationMessage]> {
   const FALLBACK_ANSWER = 'Not mentioned.';
-  const answer = await ai.models.generateContent({
-    model: 'gemini-2.5-flash',
+  const ASSISTANT_NAME = process.env.ASSISTANT_NAME || 'AI Assistant';
+  const response = await ai.models.generateContent({
+    model: process.env.CONTENTS_MODEL || 'gemini-2.5-flash',
     contents: [
       {
         role: 'user',
         parts: [
           {
             text: `
-            Answer the question **only** using the information below.
-            If the answer cannot be found, say "${FALLBACK_ANSWER}".
+              You are **${ASSISTANT_NAME}**, an AI assistant that answers questions **strictly using the provided context**, but you can also answer **basic general questions** as long as they are related to the context. You must follow these rules:
 
-            Context:
-            ${context}
+              1. **Only use the information in the context**, unless a basic related fact is commonly known and directly connected.
+              2. **Do not assume or infer complex knowledge** beyond the context and related basics.
+              3. If the answer cannot be found in the context or through a directly related basic fact, respond exactly:
 
-            Question:
-            ${question}
+                > “I don't have enough information to answer that.”
+              4. Keep answers **concise, clear, and friendly**.
+              5. Reference the context directly if helpful.
 
-            Answer:
+              **Format for each interaction:**
+
+              \`\`\`
+              Context:
+              {insert context here}
+
+              Previous Conversation History:
+              {insert previous conversation here}
+
+              User Question:
+              {insert question here}
+
+              Answer:
+              \`\`\`
+
+              **Context:**
+              ${context}
+
+              **Previous Conversation History:**
+              ${history
+                .map(
+                  (message) =>
+                    `- **${
+                      message.role === 'user' ? 'User' : ASSISTANT_NAME
+                    }:** ${message.text}`,
+                )
+                .join('\n')}
+
+              **User Question:**
+              ${question}
+
+              **Answer:**
             `,
           },
         ],
       },
     ],
   });
-  return answer.text ?? FALLBACK_ANSWER;
+  const answer = response.text ?? FALLBACK_ANSWER;
+
+  return [
+    { role: 'user', text: question },
+    { role: 'model', text: answer },
+  ];
 }
 
 export async function embedText(
@@ -38,7 +85,7 @@ export async function embedText(
   taskType: 'RETRIEVAL_QUERY' | 'RETRIEVAL_DOCUMENT',
 ) {
   const response = await ai.models.embedContent({
-    model: 'gemini-embedding-001',
+    model: process.env.EMBEDDINGS_MODEL || 'gemini-embedding-001',
     contents: text,
     config: {
       taskType,

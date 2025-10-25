@@ -200,15 +200,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-anything@npm:^4":
-  version: 4.0.5
-  resolution: "copy-anything@npm:4.0.5"
-  dependencies:
-    is-what: "npm:^5.2.0"
-  checksum: 10c0/d0a4a4102334399dae8504a2c2e13f45ad05746a9fd5cc0df349a554e3749a05e8a6d62b3724a8049cd59fc0bbbf4f54c4edc94a428edc76211dffe3ac0af586
-  languageName: node
-  linkType: hard
-
 "data-uri-to-buffer@npm:^4.0.0":
   version: 4.0.1
   resolution: "data-uri-to-buffer@npm:4.0.1"
@@ -302,7 +293,6 @@ __metadata:
     "@types/node": "npm:^24.9.1"
     dotenv: "npm:^17.2.3"
     pdf-parse: "npm:^2.4.5"
-    superjson: "npm:^2.2.3"
     tiktoken: "npm:^1.0.22"
     typescript: "npm:^5.9.3"
   languageName: unknown
@@ -347,13 +337,6 @@ __metadata:
     agent-base: "npm:^7.1.2"
     debug: "npm:4"
   checksum: 10c0/f729219bc735edb621fa30e6e84e60ee5d00802b8247aac0d7b79b0bd6d4b3294737a337b93b86a0bd9e68099d031858a39260c976dc14cdbba238ba1f8779ac
-  languageName: node
-  linkType: hard
-
-"is-what@npm:^5.2.0":
-  version: 5.5.0
-  resolution: "is-what@npm:5.5.0"
-  checksum: 10c0/065c8a4ac651988a495cc0211c2754c198788383c9fe1bbfdf6d237c423114a0c5f2fc3e26ad7ea43a63cd4169f4503f584305acbac91706d5308cc14dedd1bd
   languageName: node
   linkType: hard
 
@@ -440,15 +423,6 @@ __metadata:
   version: 5.2.1
   resolution: "safe-buffer@npm:5.2.1"
   checksum: 10c0/6501914237c0a86e9675d4e51d89ca3c21ffd6a31642efeba25ad65720bce6921c9e7e974e5be91a786b25aa058b5303285d3c15dbabf983a919f5f630d349f3
-  languageName: node
-  linkType: hard
-
-"superjson@npm:^2.2.3":
-  version: 2.2.3
-  resolution: "superjson@npm:2.2.3"
-  dependencies:
-    copy-anything: "npm:^4"
-  checksum: 10c0/276179f4a56be5c73ebb25abf07a4801d6b000f98a31ebaa3f41da1342f9d31c7fadde81bf79db8eeeec7f0ba8f62c30ca681b166a0244e1414f33fbb750c358
   languageName: node
   linkType: hard
 
