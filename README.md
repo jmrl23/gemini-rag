@@ -43,3 +43,23 @@ A Retrieval-Augmented Generation (RAG) system built with TypeScript. This projec
    ```
    yarn run start
    ```
+
+---
+
+## ⚙️ Setup (Docker)
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/jmrl23/gemini-rag.git
+   cd gemini-rag
+   ```
+
+1. **Provide necessary environment variables (create a `.env` file or put them directly inside `docker-compose.yaml`)**
+
+   > check [.env.example](https://github.com/jmrl23/gemini-rag/blob/main/.env.example) for reference
+
+1. **RUN**
+   ```bash
+   docker compose run -it app /bin/bash
+   ```

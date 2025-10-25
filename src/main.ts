@@ -9,13 +9,17 @@ async function main() {
   });
   const chunkedContext = chunkText(fullContext);
 
-  await ask(chunkedContext, 'Hello, who are you?', history, false);
+  console.log(
+    'Answer:',
+    await ask(chunkedContext, 'Introduce yourself', history, false),
+  );
 
   while (true) {
     const question = await input('Question: ');
     if (question === 'exit' || question === 'quit') break;
     if (!question) throw new Error('Question is required');
-    await ask(chunkedContext, question, history);
+    const answer = await ask(chunkedContext, question, history);
+    console.log('Answer:', answer);
   }
 }
 
@@ -33,5 +37,5 @@ async function ask(
     question,
   );
   if (pushHistory) history.push(userMessage, assistantResponse);
-  console.log('Answer:', assistantResponse.text);
+  return assistantResponse.text;
 }

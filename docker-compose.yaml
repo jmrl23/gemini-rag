@@ -1,0 +1,13 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+  app:
+    build: .
+    depends_on:
+      - qdrant
+    stdin_open: true
+    tty: true
+    environment:
+      QDRANT_URL: http://qdrant:6333
+    env_file:
+      - .env
