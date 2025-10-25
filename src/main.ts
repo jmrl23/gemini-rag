@@ -32,6 +32,6 @@ async function ask(
     history.slice(-5),
     question,
   );
-  history.push(userMessage, assistantResponse);
+  if (pushHistory) history.push(userMessage, assistantResponse);
   console.log('Answer:', assistantResponse.text);
 }
