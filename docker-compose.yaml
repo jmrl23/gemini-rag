@@ -1,5 +1,5 @@
 services:
-  app:
+  rag:
     build: .
     depends_on:
       - qdrant
@@ -13,6 +13,5 @@ services:
       - .env
   redis:
     image: redis:7.4.2-alpine
-    container_name: redis
   qdrant:
     image: qdrant/qdrant:latest
