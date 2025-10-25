@@ -1,4 +1,5 @@
 import { getResponse } from './assistant';
+import { cache } from './cache';
 import { PDF_RESOURCE_URL } from './env';
 import { ConversationMessage } from './gemini';
 import { chunkText, input, pdfToText } from './utils';
@@ -19,6 +20,8 @@ async function main() {
     const answer = await ask(chunkedContext, question, history);
     console.log('Answer:', answer);
   }
+
+  await cache.disconnect();
 }
 
 void main();

@@ -1,7 +1,10 @@
+import crypto from 'crypto';
+import ms from 'ms';
 import mustache from 'mustache';
 import fs from 'node:fs';
 import path from 'node:path';
 import { v5 as uuidv5 } from 'uuid';
+import { cache } from './cache';
 import {
   ASSISTANT_NAME,
   COLLECTION_NAME,
@@ -34,7 +37,18 @@ export async function getResponse(
   }
 
   const chunkedEmbeddings = await Promise.all(
-    chunkedContext.map((text) => embedText(text, 'RETRIEVAL_DOCUMENT')),
+    chunkedContext.map(async (text) => {
+      const chunkKey = `rag:embedding:RETRIEVAL_DOCUMENT:${crypto
+        .createHash('sha256')
+        .update(text)
+        .digest('hex')}`;
+      let embedding = await cache.get<number[]>(chunkKey);
+      if (!embedding) {
+        embedding = await embedText(text, 'RETRIEVAL_DOCUMENT');
+        await cache.set(chunkKey, embedding, ms('30d'));
+      }
+      return embedding;
+    }),
   );
 
   try {
@@ -51,14 +65,27 @@ export async function getResponse(
     process.exit(1);
   }
 
-  const queryEmbeddings = await embedText(question, 'RETRIEVAL_QUERY');
+  const QUERY_EMBEDDING_CACHE_KEY = `embeddings:${question}`;
+  let queryEmbeddings: number[] =
+    (await cache.get(QUERY_EMBEDDING_CACHE_KEY)) ?? [];
 
-  let search: Awaited<ReturnType<typeof qdrant.search>> | null = null;
+  if (!queryEmbeddings || queryEmbeddings.length < 1) {
+    queryEmbeddings = await embedText(question, 'RETRIEVAL_QUERY');
+    await cache.set(QUERY_EMBEDDING_CACHE_KEY, queryEmbeddings, ms('1d'));
+  }
+
+  const SEARCH_CACHE_KEY = `search:${question}`;
+  let search: Awaited<ReturnType<typeof qdrant.search>> | null =
+    (await cache.get<any>(SEARCH_CACHE_KEY)) ?? null;
+
   try {
-    search = await qdrant.search(COLLECTION_NAME, {
-      vector: queryEmbeddings,
-      limit: 5,
-    });
+    if (!search || search.length < 1) {
+      search = await qdrant.search(COLLECTION_NAME, {
+        vector: queryEmbeddings,
+        limit: 5,
+      });
+      await cache.set(`search:${question}`, search, ms('10m'));
+    }
   } catch (error) {
     console.error('Error searching Qdrant collection:', error);
     process.exit(1);

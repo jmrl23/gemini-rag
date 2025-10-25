@@ -5,6 +5,15 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
+"@cacheable/utils@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@cacheable/utils@npm:2.1.0"
+  dependencies:
+    keyv: "npm:^5.5.3"
+  checksum: 10c0/0fe83cd992863c9234d83aa1cf108e83e02013bc81f730ba187861bc4d2a60b62fb3945b37dd4f5f58d749a4dff8420d6e9e723324aa2bda53944bedbd83ebd1
+  languageName: node
+  linkType: hard
+
 "@google/genai@npm:^1.27.0":
   version: 1.27.0
   resolution: "@google/genai@npm:1.27.0"
@@ -17,6 +26,26 @@ __metadata:
     "@modelcontextprotocol/sdk":
       optional: true
   checksum: 10c0/959d0370a29013ccc2f45e62b389c438255a193c5e6242e4854ec1b6437f99d47cfbc41784d32c5a70e58f453f91aef1bf27ee9fcb026d0fdd8cf561634e75ee
+  languageName: node
+  linkType: hard
+
+"@keyv/redis@npm:^5.1.3":
+  version: 5.1.3
+  resolution: "@keyv/redis@npm:5.1.3"
+  dependencies:
+    "@redis/client": "npm:^5.8.3"
+    cluster-key-slot: "npm:^1.1.2"
+    hookified: "npm:^1.12.1"
+  peerDependencies:
+    keyv: ^5.5.3
+  checksum: 10c0/a7648736cbbdfc6748786d69ddd4b4be595fadbe4d8cf4cc5749f20ab14bf53ec07bd7055f4a1bc481662cf39a37f9148cab258f87b79de9224184b8524baef1
+  languageName: node
+  linkType: hard
+
+"@keyv/serialize@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@keyv/serialize@npm:1.1.1"
+  checksum: 10c0/b0008cae4a54400c3abf587b8cc2474c6f528ee58969ce6cf9cb07a04006f80c73c85971d6be6544408318a2bc40108236a19a82aea0a6de95aae49533317374
   languageName: node
   linkType: hard
 
@@ -149,6 +178,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@redis/client@npm:^5.8.3":
+  version: 5.9.0
+  resolution: "@redis/client@npm:5.9.0"
+  dependencies:
+    cluster-key-slot: "npm:1.1.2"
+  checksum: 10c0/f4963fc78ff11ead264321dac8a99e34373048537ffbdf29eb6a04c93a147e0778c832b6d396ba86d4339e6fd36668bb255744ba29113393328d3945b095190f
+  languageName: node
+  linkType: hard
+
 "@sevinf/maybe@npm:0.5.0":
   version: 0.5.0
   resolution: "@sevinf/maybe@npm:0.5.0"
@@ -160,6 +198,13 @@ __metadata:
   version: 1.0.10
   resolution: "@tsconfig/recommended@npm:1.0.10"
   checksum: 10c0/402ef03da7300ea0f9f9d6e0507dcb8782c6b764c1f45b946a6c34f2bd3153571a1a85f10659606c24d1052aed699c3e32dd0da876e8f7eea577374eeeb80d17
+  languageName: node
+  linkType: hard
+
+"@types/ms@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@types/ms@npm:2.1.0"
+  checksum: 10c0/5ce692ffe1549e1b827d99ef8ff71187457e0eb44adbae38fdf7b9a74bae8d20642ee963c14516db1d35fa2652e65f47680fdf679dcbde52bbfadd021f497225
   languageName: node
   linkType: hard
 
@@ -204,6 +249,23 @@ __metadata:
   version: 1.0.1
   resolution: "buffer-equal-constant-time@npm:1.0.1"
   checksum: 10c0/fb2294e64d23c573d0dd1f1e7a466c3e978fe94a4e0f8183937912ca374619773bef8e2aceb854129d2efecbbc515bbd0cc78d2734a3e3031edb0888531bbc8e
+  languageName: node
+  linkType: hard
+
+"cache-manager@npm:^7.2.4":
+  version: 7.2.4
+  resolution: "cache-manager@npm:7.2.4"
+  dependencies:
+    "@cacheable/utils": "npm:^2.1.0"
+    keyv: "npm:^5.5.3"
+  checksum: 10c0/51b52d31bbdcc7386a8dfd1c5398bdbbcb1fe1c7891885ee6c7e58d58ab7e7052eb394f26e58c018017153864ea9f9839bef84dbe6fe62d10e12dfa98d267a07
+  languageName: node
+  linkType: hard
+
+"cluster-key-slot@npm:1.1.2, cluster-key-slot@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "cluster-key-slot@npm:1.1.2"
+  checksum: 10c0/d7d39ca28a8786e9e801eeb8c770e3c3236a566625d7299a47bb71113fb2298ce1039596acb82590e598c52dbc9b1f088c8f587803e697cb58e1867a95ff94d3
   languageName: node
   linkType: hard
 
@@ -302,12 +364,17 @@ __metadata:
   resolution: "gemini-rag@workspace:."
   dependencies:
     "@google/genai": "npm:^1.27.0"
+    "@keyv/redis": "npm:^5.1.3"
     "@qdrant/js-client-rest": "npm:^1.15.1"
     "@tsconfig/recommended": "npm:^1.0.10"
+    "@types/ms": "npm:^2.1.0"
     "@types/mustache": "npm:^4.2.6"
     "@types/node": "npm:^24.9.1"
+    cache-manager: "npm:^7.2.4"
     dotenv: "npm:^17.2.3"
     env-var: "npm:^7.5.0"
+    keyv: "npm:^5.5.3"
+    ms: "npm:^2.1.3"
     mustache: "npm:^4.2.0"
     pdf-parse: "npm:^2.4.5"
     tiktoken: "npm:^1.0.22"
@@ -348,6 +415,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hookified@npm:^1.12.1":
+  version: 1.12.2
+  resolution: "hookified@npm:1.12.2"
+  checksum: 10c0/e28e2702d354d45bfdf5ccccc98e8e96ac2f7f37bd2efc556cd030cf10c014e3749c08a1e2a6f185ec31d7fe273179f7ac8eb5c2f0d047b5ebd13fa953169181
+  languageName: node
+  linkType: hard
+
 "https-proxy-agent@npm:^7.0.1":
   version: 7.0.6
   resolution: "https-proxy-agent@npm:7.0.6"
@@ -385,6 +459,15 @@ __metadata:
     jwa: "npm:^2.0.0"
     safe-buffer: "npm:^5.0.1"
   checksum: 10c0/f1ca77ea5451e8dc5ee219cb7053b8a4f1254a79cb22417a2e1043c1eb8a569ae118c68f24d72a589e8a3dd1824697f47d6bd4fb4bebb93a3bdf53545e721661
+  languageName: node
+  linkType: hard
+
+"keyv@npm:^5.5.3":
+  version: 5.5.3
+  resolution: "keyv@npm:5.5.3"
+  dependencies:
+    "@keyv/serialize": "npm:^1.1.1"
+  checksum: 10c0/6890ed8a76e6b16034ceda89a4a7dc9cd1ebd05bf0ee1f7f3d3fe37ac3e4a6196d710ab2fef3d47cf8c394b61104b3bfcab17f23cc6e0dc2dcbe36483a43f84d
   languageName: node
   linkType: hard
 

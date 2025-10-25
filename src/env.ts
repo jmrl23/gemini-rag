@@ -9,9 +9,11 @@ export const PDF_RESOURCE_URL = env
 
 export const QDRANT_URL = env.get('QDRANT_URL').required().asString();
 
+export const REDIS_URL = env.get('REDIS_URL').required().asString();
+
 export const COLLECTION_NAME = env
   .get('COLLECTION_NAME')
-  .default('docs')
+  .default('gemini-rag')
   .asString();
 
 export const EMBEDDINGS_MODEL = env
