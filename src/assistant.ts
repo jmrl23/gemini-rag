@@ -11,7 +11,7 @@ import {
   EMBEDDINGS_DIMENSION,
   PROMPT_TEMPLATE,
 } from './env';
-import { ConversationMessage, embedText, generateAnswer } from './gemini';
+import { ConversationMessage, embedText, modelAnswer } from './gemini';
 import { qdrant } from './qdrant';
 
 export async function getResponse(
@@ -84,7 +84,7 @@ export async function getResponse(
         vector: queryEmbeddings,
         limit: 5,
       });
-      await cache.set(`search:${question}`, search, ms('10m'));
+      await cache.set(SEARCH_CACHE_KEY, search, ms('10m'));
     }
   } catch (error) {
     console.error('Error searching Qdrant collection:', error);
@@ -118,7 +118,7 @@ export async function getResponse(
       .join('\n'),
     question,
   });
-  const response = await generateAnswer([{ text }]);
+  const response = await modelAnswer([{ text }]);
   return [
     {
       role: 'user',

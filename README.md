@@ -61,5 +61,5 @@ A Retrieval-Augmented Generation (RAG) system built with TypeScript. This projec
 
 1. **RUN**
    ```bash
-   docker compose run -it app /bin/bash
+   docker compose run -it rag /bin/bash
    ```

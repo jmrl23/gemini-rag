@@ -11,14 +11,14 @@ async function main() {
   });
   const chunkedContext = chunkText(fullContext);
 
-  console.log('Answer:', await ask(chunkedContext, 'Introduce yourself'));
-
   while (true) {
-    const question = await input('Question: ');
+    const question = await input('> ');
     if (question === 'exit' || question === 'quit') break;
     if (!question) throw new Error('Question is required');
     const answer = await ask(chunkedContext, question, history);
-    console.log('Answer:', answer);
+    console.log('\n');
+    console.log(answer);
+    console.log('='.repeat(process.stdout.columns || 80));
   }
 
   await cache.disconnect();

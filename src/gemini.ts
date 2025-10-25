@@ -15,7 +15,7 @@ export type ConversationMessage = {
   text: string;
 };
 
-export async function generateAnswer(parts: Part[]) {
+export async function modelAnswer(parts: Part[]) {
   const response = await ai.models.generateContent({
     model: CONTENTS_MODEL,
     contents: [
