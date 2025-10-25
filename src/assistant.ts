@@ -1,15 +1,15 @@
 import mustache from 'mustache';
-import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
-import { ConversationMessage, embedText, generateAnswer } from './gemini';
-import { qdrant } from './qdrant';
+import { v5 as uuidv5 } from 'uuid';
 import {
   ASSISTANT_NAME,
   COLLECTION_NAME,
   EMBEDDINGS_DIMENSION,
   PROMPT_TEMPLATE,
 } from './env';
+import { ConversationMessage, embedText, generateAnswer } from './gemini';
+import { qdrant } from './qdrant';
 
 export async function getResponse(
   chunkedContext: string[],
@@ -31,9 +31,11 @@ export async function getResponse(
   const chunkedEmbeddings = await Promise.all(
     chunkedContext.map((text) => embedText(text, 'RETRIEVAL_DOCUMENT')),
   );
+
+  const UUID_NAMESPACE = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
   await qdrant.upsert(COLLECTION_NAME, {
     points: chunkedContext.map((text, index) => ({
-      id: randomUUID(),
+      id: uuidv5(text, UUID_NAMESPACE),
       vector: chunkedEmbeddings[index],
       payload: { text },
     })),

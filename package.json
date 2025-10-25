@@ -19,6 +19,7 @@
     "env-var": "^7.5.0",
     "mustache": "^4.2.0",
     "pdf-parse": "^2.4.5",
-    "tiktoken": "^1.0.22"
+    "tiktoken": "^1.0.22",
+    "uuid": "^13.0.0"
   }
 }
